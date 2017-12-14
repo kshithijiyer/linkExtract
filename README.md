@@ -2,7 +2,7 @@
 This is a command-line python script which can be used to extact links from IRC log files.
 
 ## Prerequisites
-1. Python 3.x
+Python 3.x
 
 ## Installation and Usage
 1. Download the project files from github.
@@ -28,7 +28,7 @@ python3 linkExtract.py -h
 
 
 ## Built with 
-1. [IDLE 3](https://www.python.org/downloads/)
+[IDLE 3](https://www.python.org/downloads/)
 
 
 ## Author
