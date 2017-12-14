@@ -21,7 +21,7 @@ python3 linkExtract.py -i <inputfile> -o <outputfile>
 ```
 python3 linkExtract.py --ifile=<inputfile> --ofile=<outputfile> 
 ```
-4. For printing the help menu use the following command.
+4. For displaying the help menu use the following command.
 ```
 python3 linkExtract.py -h
 ```
