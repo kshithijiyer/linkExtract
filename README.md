@@ -35,4 +35,4 @@ python3 linkExtract.py -h
 [Kshithij Iyer](https://www.linkedin.com/in/kshithij-iyer/)
 
 ## Licence 
-The project is released under apache 2.0 licence.
+The project is released under Apache 2.0 licence.
