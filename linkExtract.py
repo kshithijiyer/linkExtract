@@ -8,55 +8,70 @@
 #Email: ahole@disroot.org
 #Date of Creation: 13/12/2017
 
-#regex for links
-#^((http[s]?|ftp):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.*)?(#[\w\-]+)?$
-
 #Settings:
-delimeter=" "#The delimeter used in the file.
+delimeter=" " #The delimeter used in the file.
 
 #imports
-import sys, getopt
+import sys, getopt, re 
 
 def main(argv):
-    inputfile = ''
-    outputfile = ''
+    input_file=''
+    output_file=''
+
     try:
         opts, args = getopt.getopt(argv,"hi:o:",["ifile=","ofile="])
     except getopt.GetoptError:
-        print('python3 linkExtract.py -i <inputfile> -o <outputfile>')
+        print("Error: Unable to identify the given argument!")
+        print('python3 linkExtract.py -i <input_file> -o <output_file>')
         sys.exit(2)
+
     for opt, arg in opts:
         if opt == '-h':
-            print('python3 linkExtract.py -i <inputfile> -o <outputfile>')
+            print('python3 linkExtract.py -i <input_file> -o <output_file>')
             sys.exit(2)
         elif opt in ("-i", "--ifile"):
-            inputfile = arg
+            input_file = arg
         elif opt in ("-o", "--ofile"):
-            outputfile = arg
-        print('Input file is ', inputfile)
-        print('Output file is ', outputfile)
-        if outputfile=="" or outputfile==" ":
-            datafile=open(inputfile,"r")
-            linkfile=open("links.txt","a")
-        elif inputfile==" " or inputfile=="":
+            output_file = arg
+
+        #Printing infromation about the input and output files 
+        print("*"*40)
+        print('Input file:',input_file)
+        print('Output file:',output_file)
+        print("*"*40)
+
+        #Setting the input and output files 
+        if output_file=="" or output_file==" ":
+            log_file=open(input_file,"r")
+            link_file=open("links.txt","a")
+        elif input_file==" " or input_file=="":
             print("Error: No input file provided!")
             sys.exit(2)
         else:
-            datafile=open(inputfile,"r")
-            linkfile=open(outputfile,"a")
-            
-        #regex and writing logic goes here
+            log_file=open(input_file,"r")
+            link_file=open(output_file,"a")
+
+        #Reading the input file line by line and extracting the links and writing them to output file 
         while True:
-            line=datafile.readline()
+            line=log_file.readline()
             if line:
                 words=line.split(delimeter)
                 for word in words:
-                    print(word)
+                    link_regex=re.compile("^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$")
+                    link_match=link_regex.match(word)
+                    if link_match:
+                        link=link_match.group()+"\n"
+                        link_file.write(link)
             else:
                 break
-        #close files goes here
-        datafile.close()
-        linkfile.close()
+
+            
+        #closing files
+        log_file.close()
+        link_file.close()
+
+        #Final termination message
+        print("Extraction completed!")
 
 if __name__ == "__main__":
     main(sys.argv[1:])
