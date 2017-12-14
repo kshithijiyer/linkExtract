@@ -17,7 +17,7 @@ cd linkExtract
 ```
 python3 linkExtract.py -i <inputfile> -o <outputfile>
 ```
-or 
+    or 
 ```
 python3 linkExtract.py --ifile=<inputfile> --ofile=<outputfile> 
 ```
