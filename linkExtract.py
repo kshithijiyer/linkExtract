@@ -34,7 +34,7 @@ def main(argv):
         elif opt in ("-o", "--ofile"):
             output_file = arg
 
-        #Printing infromation about the input and output files 
+        #Printing information about the input and output files.
         print("*"*40)
         print('Input file:',input_file)
         print('Output file:',output_file)
@@ -51,7 +51,7 @@ def main(argv):
             log_file=open(input_file,"r")
             link_file=open(output_file,"a")
 
-        #Reading the input file line by line and extracting the links and writing them to output file 
+        #Reading given file line by line and extracting the links and writing them to them output file. 
         while True:
             line=log_file.readline()
             if line:
